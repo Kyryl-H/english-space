@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="meta.home.title">
+      English Space — твій простір для вивчення англійської
+    </title>
+    <meta
+      name="description"
+      content="English Space — освітній ресурс з англійської мови: інтерактивні завдання та навчальні матеріали."
+      data-i18n-attr="content:meta.home.desc"
+    />
+
+    <!-- Іконка вкладки -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="assets/icons/favicon.png"
+    />
+
+    <!-- Запобігає «блиманню» української, якщо збережена інша мова.
+       Приховує сторінку, доки i18n.js не застосує переклад (не довше 1,5 с). -->
+    <script>
+      (function () {
+        try {
+          var lang = localStorage.getItem("englishSpace.lang");
+          if (lang && lang !== "ua") {
+            var root = document.documentElement;
+            root.classList.add("lang-pending");
+            setTimeout(function () {
+              root.classList.remove("lang-pending");
+            }, 1500);
+          }
+        } catch (e) {
+          /* localStorage недоступний — нічого не робимо */
+        }
+      })();
+    </script>
+
+    <!-- Шрифт Inter (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Перейти до змісту</a>
+
+    <!-- ===== ШАПКА (однакова на всіх сторінках) ===== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html">English Space</a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Відкрити меню"
+          data-i18n-attr="aria-label:nav.openMenu"
+        >
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <nav
+          class="site-nav"
+          id="site-nav"
+          aria-label="Основна навігація"
+          data-i18n-attr="aria-label:nav.main"
+        >
+          <ul class="nav-list">
+            <li>
+              <a href="index.html" aria-current="page" data-i18n="nav.home"
+                >Головна</a
+              >
+            </li>
+            <li>
+              <a href="practice.html" data-i18n="nav.practice">Практика</a>
+            </li>
+            <li>
+              <a href="resources.html" data-i18n="nav.resources">Матеріали</a>
+            </li>
+          </ul>
+
+          <!-- Перемикач мови: працюватиме після Етапу 4 -->
+          <div
+            class="lang-switch"
+            role="group"
+            aria-label="Мова інтерфейсу"
+            data-i18n-attr="aria-label:lang.label"
+          >
+            <button
+              class="lang-btn is-active"
+              type="button"
+              data-lang="ua"
+              aria-pressed="true"
+            >
+              UA
+            </button>
+            <button
+              class="lang-btn"
+              type="button"
+              data-lang="en"
+              aria-pressed="false"
+            >
+              EN
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <h1 data-i18n="home.h1">
+              English Space — твій простір для вивчення англійської
+            </h1>
+            <p class="lead" data-i18n="home.lead">
+              Інтерактивні завдання та навчальні матеріали з англійської мови в
+              одному місці.
+            </p>
+            <div class="btn-group">
+              <a
+                class="btn btn--primary"
+                href="practice.html"
+                data-i18n="home.btnPractice"
+                >Почати практику</a
+              >
+              <a
+                class="btn btn--secondary"
+                href="resources.html"
+                data-i18n="home.btnResources"
+                >Навчальні матеріали</a
+              >
+            </div>
+          </div>
+          <!-- Місце під зображення; замінимо на <img>, коли буде файл -->
+          <div
+            class="media-placeholder"
+            role="img"
+            aria-label="Місце для зображення"
+            data-i18n-attr="aria-label:home.imagePlaceholder"
+          >
+            <span data-i18n="home.imagePlaceholder">Місце для зображення</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== НАПРЯМИ НАВЧАННЯ ===== -->
+      <section class="section" aria-labelledby="directions-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="directions-title" data-i18n="dir.title">
+              Напрями навчання
+            </h2>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <span class="card-icon" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 6h16M4 12h10M4 18h16" />
+                  <path d="m16 11 2 2 3-4" /></svg
+              ></span>
+              <h3 data-i18n="dir.grammar">Граматика</h3>
+              <p class="card-text" data-i18n="dir.grammar.text">
+                Правила та вправи для впевненого письма й мовлення.
+              </p>
+            </article>
+            <article class="card">
+              <span class="card-icon" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2Z"
+                  />
+                  <path d="M12 6.5v13" /></svg
+              ></span>
+              <h3 data-i18n="dir.vocabulary">Лексика</h3>
+              <p class="card-text" data-i18n="dir.vocabulary.text">
+                Нові слова, вирази та закріплення через практику.
+              </p>
+            </article>
+            <article class="card">
+              <span class="card-icon" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M20 11.5a7.5 7.5 0 0 1-11 6.6L4 19.5l1.4-4.4A7.5 7.5 0 1 1 20 11.5Z"
+                  /></svg
+              ></span>
+              <h3 data-i18n="dir.speaking">Говоріння</h3>
+              <p class="card-text" data-i18n="dir.speaking.text">
+                Підготовка до діалогів і розмовної практики.
+              </p>
+            </article>
+            <article class="card">
+              <span class="card-icon" aria-hidden="true"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+                  <rect x="3" y="14" width="4.5" height="6.5" rx="1.5" />
+                  <rect
+                    x="16.5"
+                    y="14"
+                    width="4.5"
+                    height="6.5"
+                    rx="1.5"
+                  /></svg
+              ></span>
+              <h3 data-i18n="dir.listening">Аудіювання</h3>
+              <p class="card-text" data-i18n="dir.listening.text">
+                Розвиток розуміння англійської на слух.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ПРО РЕСУРС ===== -->
+      <section class="section section--alt" aria-labelledby="about-title">
+        <div class="container about-grid">
+          <div class="section-head">
+            <h2 id="about-title" data-i18n="about.title">
+              Про освітній ресурс
+            </h2>
+            <p class="lead" data-i18n="about.lead">
+              Сайт об'єднує інтерактивні завдання та навчальні матеріали з
+              англійської мови. Контент оновлюють викладачі без редагування
+              коду.
+            </p>
+          </div>
+          <ul class="feature-list">
+            <li class="feature">
+              <h3 data-i18n="about.f1.title">Інтерактивні завдання</h3>
+              <p class="card-text" data-i18n="about.f1.text">
+                Каталог завдань Wordwall із пошуком і фільтрами за категорією та
+                рівнем.
+              </p>
+            </li>
+            <li class="feature">
+              <h3 data-i18n="about.f2.title">Навчальні матеріали</h3>
+              <p class="card-text" data-i18n="about.f2.text">
+                Підручники, граматика, словники, аудіо та корисні посилання.
+              </p>
+            </li>
+            <li class="feature">
+              <h3 data-i18n="about.f3.title">Українська та англійська</h3>
+              <p class="card-text" data-i18n="about.f3.text">
+                Інтерфейс сайту доступний двома мовами.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===== ВИКЛАДАЧІ (заглушки до отримання реальних даних) ===== -->
+      <section class="section" aria-labelledby="teachers-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 id="teachers-title" data-i18n="teachers.title">Викладачі</h2>
+          </div>
+          <div class="card-grid card-grid--3">
+            <article class="card card--teacher">
+              <div
+                class="teacher-photo"
+                role="img"
+                aria-label="Заглушка для фотографії викладача"
+                data-i18n-attr="aria-label:teacher.photoAlt"
+              >
+                <span data-i18n="teacher.photo">Фото</span>
+              </div>
+              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
+              <p class="teacher-role" data-i18n="teacher.role">
+                Посада (заглушка)
+              </p>
+              <p class="card-text">
+                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
+                <span data-i18n="teacher.specValue">буде додано.</span>
+              </p>
+              <p class="card-text" data-i18n="teacher.bio">
+                Короткий опис викладача буде додано.
+              </p>
+            </article>
+            <article class="card card--teacher">
+              <div
+                class="teacher-photo"
+                role="img"
+                aria-label="Заглушка для фотографії викладача"
+                data-i18n-attr="aria-label:teacher.photoAlt"
+              >
+                <span data-i18n="teacher.photo">Фото</span>
+              </div>
+              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
+              <p class="teacher-role" data-i18n="teacher.role">
+                Посада (заглушка)
+              </p>
+              <p class="card-text">
+                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
+                <span data-i18n="teacher.specValue">буде додано.</span>
+              </p>
+              <p class="card-text" data-i18n="teacher.bio">
+                Короткий опис викладача буде додано.
+              </p>
+            </article>
+            <article class="card card--teacher">
+              <div
+                class="teacher-photo"
+                role="img"
+                aria-label="Заглушка для фотографії викладача"
+                data-i18n-attr="aria-label:teacher.photoAlt"
+              >
+                <span data-i18n="teacher.photo">Фото</span>
+              </div>
+              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
+              <p class="teacher-role" data-i18n="teacher.role">
+                Посада (заглушка)
+              </p>
+              <p class="card-text">
+                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
+                <span data-i18n="teacher.specValue">буде додано.</span>
+              </p>
+              <p class="card-text" data-i18n="teacher.bio">
+                Короткий опис викладача буде додано.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== ПІДВАЛ (однаковий на всіх сторінках) ===== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-title">English Space</p>
+            <p data-i18n="footer.about">
+              Освітній ресурс для вивчення англійської мови.
+            </p>
+          </div>
+          <nav
+            aria-label="Навігація в підвалі"
+            data-i18n-attr="aria-label:footer.navLabel"
+          >
+            <p class="footer-title" data-i18n="footer.sections">Розділи</p>
+            <ul class="footer-list">
+              <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+              <li>
+                <a href="practice.html" data-i18n="nav.practice">Практика</a>
+              </li>
+              <li>
+                <a href="resources.html" data-i18n="nav.resources">Матеріали</a>
+              </li>
+            </ul>
+          </nav>
+          <div>
+            <p class="footer-title" data-i18n="footer.contacts">Контакти</p>
+            <address class="footer-contacts">
+              <ul class="footer-list">
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"
+                    />
+                    <circle cx="12" cy="10" r="2.25" /></svg
+                  ><span data-i18n="footer.address"
+                    >вул. Небесної сотні, 37, Житомир, Україна, 1030</span
+                  >
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L15 13l4 1.5V18a2 2 0 0 1-2 2A13 13 0 0 1 3 6a2 2 0 0 1 2-2Z"
+                    /></svg
+                  ><span
+                    ><a href="tel:+380674118100">+38 (067) 411-81-00</a><br /><a
+                      href="tel:+380412473172"
+                      >(0412) 473-172</a
+                    ></span
+                  >
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3.5 7 8.5 6.5L20.5 7" /></svg
+                  ><a href="mailto:ztkknuba@ukr.net">ztkknuba@ukr.net</a>
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path
+                      d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"
+                    /></svg
+                  ><a
+                    href="https://ztk.org.ua"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ztk.org.ua</a
+                  >
+                </li>
+              </ul>
+            </address>
+            <ul
+              class="social-list"
+              aria-label="Соціальні мережі"
+              data-i18n-attr="aria-label:footer.social"
+            >
+              <li>
+                <a
+                  class="social-link"
+                  href="https://www.instagram.com/ztfk.knuba"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram (відкриється в новій вкладці)"
+                  data-i18n-attr="aria-label:footer.instagram"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle
+                      cx="17.2"
+                      cy="6.8"
+                      r="0.6"
+                      fill="currentColor"
+                    /></svg
+                ></a>
+              </li>
+              <li>
+                <a
+                  class="social-link"
+                  href="https://www.facebook.com/share/1DmfsU2kYp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook (відкриється в новій вкладці)"
+                  data-i18n-attr="aria-label:footer.facebook"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M17 3h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2Z"
+                    /></svg
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-bottom">
+          &copy; <span data-year>2026</span> English Space
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/i18n.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

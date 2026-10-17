@@ -1,0 +1,443 @@
+/* ==========================================================
+   style.css — основа: змінні, скидання, типографіка,
+   каркас сторінки, шапка та підвал.
+   Підключається першим на кожній сторінці.
+   ========================================================== */
+
+/* ---------- Змінні (дизайн-токени) ---------- */
+:root {
+  /* Кольори */
+  --color-navy: #14284b;
+  --color-navy-soft: #1f3a6b;
+  --color-blue: #2f80ed; /* акцент для рамок, іконок, фонів */
+  --color-blue-text: #1d63c9; /* акцент для тексту (контраст AA) */
+  --color-bg: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-text: #1b2433;
+  --color-muted: #5b6577;
+  --color-border: #e3e8f0;
+  --color-focus: #2f80ed;
+
+  /* Типографіка */
+  --font-main:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Відступи */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 5rem;
+
+  /* Форма */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --shadow-sm:
+    0 1px 2px rgba(20, 40, 75, 0.06), 0 2px 8px rgba(20, 40, 75, 0.05);
+
+  /* Розміри */
+  --container-width: 1120px;
+  --header-height: 68px;
+}
+
+/* ---------- Скидання ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-blue-text);
+}
+
+/* Видимий фокус для клавіатури */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Повага до налаштувань "зменшити анімацію" */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Типографіка ---------- */
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.lead {
+  font-size: 1.125rem;
+  color: var(--color-muted);
+  max-width: 60ch;
+}
+
+/* ---------- Каркас ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.section {
+  padding-block: var(--space-8);
+}
+
+.section--alt {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+
+.section-head {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+/* Відступ між вмістом сторінки (картки, стани) і підвалом */
+.page-container {
+  padding-bottom: var(--space-8);
+}
+
+.page-head {
+  padding-block: var(--space-7) var(--space-5);
+}
+
+.page-head .lead {
+  margin-top: var(--space-3);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 200;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-navy);
+  color: #fff;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: var(--space-3);
+}
+
+/* ---------- Шапка ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--header-height);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.nav-list a {
+  display: inline-block;
+  padding: var(--space-2) 0;
+  color: var(--color-text);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-list a:hover {
+  color: var(--color-blue-text);
+}
+
+.nav-list a[aria-current="page"] {
+  color: var(--color-navy);
+  border-bottom-color: var(--color-blue);
+}
+
+/* Перемикач мови (логіка з'явиться на Етапі 4) */
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.lang-btn {
+  min-width: 44px;
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.lang-btn:hover {
+  color: var(--color-navy);
+}
+
+.lang-btn.is-active {
+  color: #fff;
+  background: var(--color-navy);
+}
+
+/* Кнопка мобільного меню */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  width: 20px;
+  height: 2px;
+  background: var(--color-navy);
+  border-radius: 2px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.nav-toggle-bar {
+  top: 20px;
+}
+
+.nav-toggle-bar::before {
+  left: 0;
+  top: -6px;
+}
+
+.nav-toggle-bar::after {
+  left: 0;
+  top: 6px;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar {
+  background: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ---------- Підвал ---------- */
+.site-footer {
+  margin-top: auto;
+  padding-block: var(--space-7) var(--space-5);
+  color: #cdd7e8;
+  background: var(--color-navy);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.7fr 1.5fr;
+  gap: var(--space-6);
+}
+
+.footer-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--space-3);
+}
+
+.footer-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.site-footer a {
+  color: #cdd7e8;
+}
+
+.site-footer a:hover {
+  color: #fff;
+}
+
+.site-footer :focus-visible {
+  outline-color: #fff;
+}
+
+.footer-bottom {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  font-size: 0.875rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Щоб підвал притискався донизу на коротких сторінках */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- Контакти в підвалі ---------- */
+.footer-contacts {
+  font-style: normal;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.contact-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: #8fb7f5;
+}
+
+.contact-item a {
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.social-list {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+.social-link svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Поки i18n.js не застосував збережену мову, сторінку приховано
+   (клас додає скрипт у <head>; страховка — автоматичне зняття через 1,5 с) */
+html.lang-pending body {
+  visibility: hidden;
+}

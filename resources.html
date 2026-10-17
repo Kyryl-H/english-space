@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="meta.resources.title">Матеріали — English Space</title>
+    <meta
+      name="description"
+      content="Бібліотека навчальних матеріалів з англійської мови."
+      data-i18n-attr="content:meta.resources.desc"
+    />
+
+    <!-- Іконка вкладки -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="assets/icons/favicon.png"
+    />
+
+    <!-- Запобігає «блиманню» української, якщо збережена інша мова.
+       Приховує сторінку, доки i18n.js не застосує переклад (не довше 1,5 с). -->
+    <script>
+      (function () {
+        try {
+          var lang = localStorage.getItem("englishSpace.lang");
+          if (lang && lang !== "ua") {
+            var root = document.documentElement;
+            root.classList.add("lang-pending");
+            setTimeout(function () {
+              root.classList.remove("lang-pending");
+            }, 1500);
+          }
+        } catch (e) {
+          /* localStorage недоступний — нічого не робимо */
+        }
+      })();
+    </script>
+
+    <!-- Шрифт Inter (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main" data-i18n="skip">Перейти до змісту</a>
+
+    <!-- ===== ШАПКА (однакова на всіх сторінках) ===== -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html">English Space</a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Відкрити меню"
+          data-i18n-attr="aria-label:nav.openMenu"
+        >
+          <span class="nav-toggle-bar"></span>
+        </button>
+
+        <nav
+          class="site-nav"
+          id="site-nav"
+          aria-label="Основна навігація"
+          data-i18n-attr="aria-label:nav.main"
+        >
+          <ul class="nav-list">
+            <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+            <li>
+              <a href="practice.html" data-i18n="nav.practice">Практика</a>
+            </li>
+            <li>
+              <a
+                href="resources.html"
+                aria-current="page"
+                data-i18n="nav.resources"
+                >Матеріали</a
+              >
+            </li>
+          </ul>
+
+          <!-- Перемикач мови: працюватиме після Етапу 4 -->
+          <div
+            class="lang-switch"
+            role="group"
+            aria-label="Мова інтерфейсу"
+            data-i18n-attr="aria-label:lang.label"
+          >
+            <button
+              class="lang-btn is-active"
+              type="button"
+              data-lang="ua"
+              aria-pressed="true"
+            >
+              UA
+            </button>
+            <button
+              class="lang-btn"
+              type="button"
+              data-lang="en"
+              aria-pressed="false"
+            >
+              EN
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="container page-container">
+        <div class="page-head">
+          <h1 data-i18n="resources.h1">Навчальні матеріали</h1>
+          <p class="lead" data-i18n="resources.lead">
+            Підручники, граматика, словники, аудіо та корисні посилання. Оберіть
+            тип і рівень або скористайтеся пошуком.
+          </p>
+        </div>
+
+        <!-- ===== ПОШУК І ФІЛЬТРИ ===== -->
+        <div class="toolbar">
+          <div class="search-field">
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Пошук за назвою або описом"
+              aria-label="Пошук матеріалів"
+              autocomplete="off"
+              data-i18n-attr="placeholder:search.placeholder;aria-label:resources.searchLabel"
+            />
+          </div>
+
+          <fieldset class="filter-group">
+            <legend class="filter-label" data-i18n="filter.type">
+              Тип матеріалу
+            </legend>
+            <div class="chip-list" id="type-filters">
+              <button
+                class="chip"
+                type="button"
+                data-type="all"
+                aria-pressed="true"
+                data-i18n="type.all"
+              >
+                Усі
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="textbooks"
+                aria-pressed="false"
+                data-i18n="type.textbooks"
+              >
+                Підручники
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="grammar"
+                aria-pressed="false"
+                data-i18n="type.grammar"
+              >
+                Граматика
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="dictionaries"
+                aria-pressed="false"
+                data-i18n="type.dictionaries"
+              >
+                Словники
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="audio"
+                aria-pressed="false"
+                data-i18n="type.audio"
+              >
+                Аудіо
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="additional materials"
+                aria-pressed="false"
+                data-i18n="type.additional"
+              >
+                Додаткові матеріали
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-type="useful links"
+                aria-pressed="false"
+                data-i18n="type.links"
+              >
+                Корисні посилання
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="filter-group">
+            <legend class="filter-label" data-i18n="filter.level">
+              Рівень
+            </legend>
+            <div class="chip-list" id="level-filters">
+              <button
+                class="chip"
+                type="button"
+                data-level="all"
+                aria-pressed="true"
+                data-i18n="level.all"
+              >
+                Усі
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-level="a1"
+                aria-pressed="false"
+              >
+                A1
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-level="a2"
+                aria-pressed="false"
+              >
+                A2
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-level="b1"
+                aria-pressed="false"
+              >
+                B1
+              </button>
+              <button
+                class="chip"
+                type="button"
+                data-level="b2"
+                aria-pressed="false"
+              >
+                B2
+              </button>
+            </div>
+          </fieldset>
+        </div>
+
+        <p
+          class="results-count"
+          id="results-count"
+          aria-live="polite"
+          hidden
+          data-i18n="results.found"
+          data-i18n-vars='{"count":0}'
+        >
+          Знайдено: 0
+        </p>
+
+        <!-- ===== СТАНИ ===== -->
+        <!-- Завантаження показано одразу; скрипт ховає його, коли дані отримано -->
+        <div class="state" id="state-loading" role="status">
+          <span class="spinner" aria-hidden="true"></span>
+          <p data-i18n="resources.loading">Завантаження матеріалів…</p>
+        </div>
+        <div class="state" id="state-error" hidden>
+          <p class="state-title" data-i18n="resources.error">
+            Не вдалося завантажити матеріали.
+          </p>
+          <p class="card-text" id="error-detail"></p>
+          <button
+            class="btn btn--secondary"
+            type="button"
+            id="retry-btn"
+            data-i18n="state.retry"
+          >
+            Спробувати ще раз
+          </button>
+        </div>
+        <div class="state" id="state-empty" hidden>
+          <p id="empty-message" data-i18n="state.empty">
+            Нічого не знайдено. Змініть запит або фільтри.
+          </p>
+        </div>
+
+        <!-- ===== СІТКА МАТЕРІАЛІВ (заповнює js/resources.js) ===== -->
+        <div class="card-grid card-grid--catalog" id="cards-grid"></div>
+      </div>
+    </main>
+
+    <!-- ===== ПІДВАЛ (однаковий на всіх сторінках) ===== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <p class="footer-title">English Space</p>
+            <p data-i18n="footer.about">
+              Освітній ресурс для вивчення англійської мови.
+            </p>
+          </div>
+          <nav
+            aria-label="Навігація в підвалі"
+            data-i18n-attr="aria-label:footer.navLabel"
+          >
+            <p class="footer-title" data-i18n="footer.sections">Розділи</p>
+            <ul class="footer-list">
+              <li><a href="index.html" data-i18n="nav.home">Головна</a></li>
+              <li>
+                <a href="practice.html" data-i18n="nav.practice">Практика</a>
+              </li>
+              <li>
+                <a href="resources.html" data-i18n="nav.resources">Матеріали</a>
+              </li>
+            </ul>
+          </nav>
+          <div>
+            <p class="footer-title" data-i18n="footer.contacts">Контакти</p>
+            <address class="footer-contacts">
+              <ul class="footer-list">
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"
+                    />
+                    <circle cx="12" cy="10" r="2.25" /></svg
+                  ><span data-i18n="footer.address"
+                    >вул. Небесної сотні, 37, Житомир, Україна, 1030</span
+                  >
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 4h3.5l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L15 13l4 1.5V18a2 2 0 0 1-2 2A13 13 0 0 1 3 6a2 2 0 0 1 2-2Z"
+                    /></svg
+                  ><span
+                    ><a href="tel:+380674118100">+38 (067) 411-81-00</a><br /><a
+                      href="tel:+380412473172"
+                      >(0412) 473-172</a
+                    ></span
+                  >
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3.5 7 8.5 6.5L20.5 7" /></svg
+                  ><a href="mailto:ztkknuba@ukr.net">ztkknuba@ukr.net</a>
+                </li>
+                <li class="contact-item">
+                  <svg
+                    class="contact-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path
+                      d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"
+                    /></svg
+                  ><a
+                    href="https://ztk.org.ua"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ztk.org.ua</a
+                  >
+                </li>
+              </ul>
+            </address>
+            <ul
+              class="social-list"
+              aria-label="Соціальні мережі"
+              data-i18n-attr="aria-label:footer.social"
+            >
+              <li>
+                <a
+                  class="social-link"
+                  href="https://www.instagram.com/ztfk.knuba"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram (відкриється в новій вкладці)"
+                  data-i18n-attr="aria-label:footer.instagram"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle
+                      cx="17.2"
+                      cy="6.8"
+                      r="0.6"
+                      fill="currentColor"
+                    /></svg
+                ></a>
+              </li>
+              <li>
+                <a
+                  class="social-link"
+                  href="https://www.facebook.com/share/1DmfsU2kYp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook (відкриється в новій вкладці)"
+                  data-i18n-attr="aria-label:footer.facebook"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M17 3h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V7a1 1 0 0 1 1-1h2Z"
+                    /></svg
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-bottom">
+          &copy; <span data-year>2026</span> English Space
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/config.js" defer></script>
+    <script src="js/csvParser.js" defer></script>
+    <script src="js/sheets.js" defer></script>
+    <script src="js/i18n.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/catalog.js" defer></script>
+    <script src="js/resources.js" defer></script>
+  </body>
+</html>
