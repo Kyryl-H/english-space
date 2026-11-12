@@ -2,17 +2,18 @@
 <html lang="uk">
   <head>
     <title>
-      English Space — англійська мова | Житомирський технологічний фаховий
-      коледж КНУБА
+      English Space — англійська мова для студентів ЖТФК КНУБА | Житомирський
+      технологічний коледж
     </title>
     <meta
       name="description"
-      content="English Space: безкоштовні матеріали та інтерактивні вправи з англійської мови для студентів і викладачів Житомирського технологічного фахового коледжу КНУБА."
+      content="English Space: безкоштовні матеріали та інтерактивні вправи з англійської мови для студентів і викладачів Житомирського технологічного фахового коледжу КНУБА (ЖТФК, ЖТК КНУБА, Житомир)."
     />
-    <link rel="canonical" href="https://kyryl-h.github.io/english-space/" />
-    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://english-space-zhtfk.vercel.app/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="English Space" />
     <meta
       property="og:title"
       content="English Space — англійська мова | ЖТФК КНУБА"
@@ -21,40 +22,28 @@
       property="og:description"
       content="Безкоштовні матеріали та інтерактивні вправи з англійської мови для студентів Житомирського технологічного фахового коледжу КНУБА."
     />
-    <meta
-      property="og:url"
-      content="https://kyryl-h.github.io/english-space/"
-    />
+    <meta property="og:url" content="https://english-space-zhtfk.vercel.app/" />
     <meta property="og:locale" content="uk_UA" />
 
-    <!-- Іконка вкладки -->
-    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="64x64"
-      href="assets/icons/favicon.png"
-    />
-
-    <!-- Запобігає «блиманню» української, якщо збережена інша мова.
-       Приховує сторінку, доки i18n.js не застосує переклад (не довше 1,5 с). -->
-    <script>
-      (function () {
-        try {
-          var lang = localStorage.getItem("englishSpace.lang");
-          if (lang && lang !== "ua") {
-            var root = document.documentElement;
-            root.classList.add("lang-pending");
-            setTimeout(function () {
-              root.classList.remove("lang-pending");
-            }, 1500);
-          }
-        } catch (e) {
-          /* localStorage недоступний — нічого не робимо */
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "English Space",
+        "alternateName": [
+          "English Space ЖТФК КНУБА",
+          "English Space Житомирський технологічний коледж"
+        ],
+        "url": "https://english-space-zhtfk.vercel.app/",
+        "inLanguage": ["uk", "en"],
+        "publisher": {
+          "@type": "EducationalOrganization",
+          "name": "Житомирський технологічний фаховий коледж КНУБА"
         }
-      })();
+      }
     </script>
 
+    <!-- Код підтвердження Search Console (для нового домену) вставте тут пізніше -->
     <!-- Шрифт Inter (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
