@@ -96,6 +96,37 @@
 
       // Головна: викладачі (заглушки)
       "teachers.title": "Викладачі",
+
+      // Про коледж
+      "college.title":
+        "Житомирський фаховий технологічний коледж — сучасний освітній простір можливостей",
+      "college.p1":
+        "Вітаємо вас у Житомирському фаховому технологічному коледжі — закладі освіти, де традиції поєднуються із сучасністю, знання — з практикою, а студентські мрії перетворюються на професійні цілі!",
+      "college.p2":
+        "Житомирський фаховий технологічний коледж — це місце, де молодь отримує не лише якісну освіту, а й можливість розкрити свої здібності, знайти однодумців, розвинути таланти та зробити перші кроки до успішного майбутнього.",
+      "college.p3":
+        "Наш коледж — це багатогранний освітній простір, у якому створені умови для професійного, інтелектуального й творчого розвитку студентів. Освітній процес спрямований на формування компетентних, відповідальних і конкурентоспроможних фахівців, здатних відповідати вимогам сучасного ринку праці.",
+      "college.p4":
+        "Особлива гордість коледжу — наш педагогічний колектив. Це професіонали, які щодня вкладають свої знання, досвід і душу в навчання та виховання молодого покоління. Викладачі використовують сучасні освітні технології, інтерактивні методи навчання, заохочують студентів до дослідницької діяльності, творчості та самореалізації.",
+      "college.p5":
+        "Студентське життя в коледжі — це не лише лекції та практичні заняття. Це цікаві зустрічі, тематичні заходи, конкурси, конференції, спортивні змагання, волонтерські ініціативи та спільні проєкти. Кожен має можливість проявити себе, відчути підтримку колективу й стати частиною великої студентської родини.",
+      "college.p6":
+        "Ми пишаємося нашими студентами, їхніми досягненнями, наполегливістю, активністю та прагненням до нових вершин. Адже саме молодь є майбутнім нашої країни, її інтелектуальним і професійним потенціалом.",
+      "college.p7":
+        "Житомирський фаховий технологічний коледж — це більше, ніж заклад освіти. Це місце, де народжуються ідеї, формується характер, відкриваються таланти та закладається фундамент майбутнього.",
+      "college.p8":
+        "Обираючи наш коледж, ви обираєте знання, професіоналізм, розвиток і нові можливості!",
+      "college.p9":
+        "Житомирський фаховий технологічний коледж — твій старт до успішного майбутнього!",
+
+      // Зображення в hero та картки викладачів
+      "home.heroAlt": "Навчальний корпус коледжу",
+      "teacher.semeniuk.name": "Семенюк Людмила Миколаївна",
+      "teacher.semeniuk.role": "Спеціаліст вищої категорії, викладач-методист",
+      "teacher.karpliuk.name": "Карплюк Тетяна Юріївна",
+      "teacher.karpliuk.role": "Викладач, спеціаліст першої категорії",
+      "teacher.khodzhaieva.name": "Ходжаєва Ельвіра Турсунівна",
+      "teacher.khodzhaieva.role": "Викладач, спеціаліст першої категорії",
       "teacher.photoAlt": "Заглушка для фотографії викладача",
       "teacher.photo": "Фото",
       "teacher.name": "Ім'я Прізвище",
@@ -236,6 +267,37 @@
 
       // Головна: викладачі (заглушки)
       "teachers.title": "Teachers",
+
+      // Про коледж
+      "college.title":
+        "Zhytomyr Professional Technological College – A Modern Educational Space of Opportunities",
+      "college.p1":
+        "Welcome to Zhytomyr Professional Technological College, an educational institution where traditions meet modernity, knowledge goes hand in hand with practical skills, and students' dreams turn into professional goals!",
+      "college.p2":
+        "Zhytomyr Professional Technological College is a place where young people receive not only a quality education but also an opportunity to discover their abilities, find like-minded people, develop their talents and take their first steps towards a successful future.",
+      "college.p3":
+        "Our college is a modern educational environment that provides opportunities for students' professional, intellectual and creative development. The educational process is aimed at training competent, responsible and competitive specialists who are ready to meet the demands of the modern labour market.",
+      "college.p4":
+        "One of the college's greatest strengths is its teaching staff. Our teachers are dedicated professionals who share their knowledge and experience and devote their time and energy to educating the younger generation. They use modern educational technologies and interactive teaching methods and encourage students to take part in research, creative activities and different projects.",
+      "college.p5":
+        "Student life at our college is not limited to lectures and practical classes. It is full of interesting meetings, themed events, competitions, conferences, sports activities, volunteering initiatives and joint projects. Every student has an opportunity to show their abilities, receive support and become part of a big student family.",
+      "college.p6":
+        "We are proud of our students, their achievements, determination, enthusiasm and desire to reach new heights. After all, young people are the future of our country and its intellectual and professional potential.",
+      "college.p7":
+        "Zhytomyr Professional Technological College is more than just an educational institution. It is a place where new ideas are born, character is developed, talents are discovered and the foundation for a successful future is built.",
+      "college.p8":
+        "By choosing our college, you choose knowledge, professionalism, personal development and new opportunities!",
+      "college.p9":
+        "Zhytomyr Professional Technological College – Your Starting Point for a Successful Future!",
+
+      // Зображення в hero та картки викладачів
+      "home.heroAlt": "Academic building of the college",
+      "teacher.semeniuk.name": "Liudmyla Mykolaivna Semeniuk",
+      "teacher.semeniuk.role": "Highest-category specialist, Teacher-Methodist",
+      "teacher.karpliuk.name": "Tetiana Yuriivna Karpliuk",
+      "teacher.karpliuk.role": "Teacher, first-category specialist",
+      "teacher.khodzhaieva.name": "Elvira Tursunivna Khodzhaieva",
+      "teacher.khodzhaieva.role": "Teacher, first-category specialist",
       "teacher.photoAlt": "Placeholder for teacher photo",
       "teacher.photo": "Photo",
       "teacher.name": "First Last Name",

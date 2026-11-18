@@ -454,3 +454,28 @@
   object-fit: cover;
   background: none;
 }
+
+/* Блок «Про коледж» (головна) */
+.college-body {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 68ch;
+}
+
+.college-tagline {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+/* Заголовок «Про коледж» лишається на екрані, поки читають довгий текст (лише на широких екранах) */
+@media (min-width: 901px) {
+  .about-grid--sticky .section-head {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-5));
+  }
+}
+
+/* Фото в квадратній рамці: обрізаємо знизу, щоб обличчя лишалися в кадрі */
+.teacher-photo--img {
+  object-position: center top;
+}

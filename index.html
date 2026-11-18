@@ -3,30 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      English Space — англійська мова для студентів ЖТФК КНУБА | Житомирський
-      технологічний коледж
+    <title data-i18n="meta.home.title">
+      English Space — твій простір для вивчення англійської
     </title>
     <meta
       name="description"
-      content="English Space: безкоштовні матеріали та інтерактивні вправи з англійської мови для студентів і викладачів Житомирського технологічного фахового коледжу КНУБА (ЖТФК, ЖТК КНУБА, Житомир)."
+      content="English Space — освітній ресурс з англійської мови: інтерактивні завдання та навчальні матеріали."
+      data-i18n-attr="content:meta.home.desc"
     />
-    <link rel="canonical" href="https://english-space-zhtfk.vercel.app/" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="English Space" />
-    <meta
-      property="og:title"
-      content="English Space — англійська мова | ЖТФК КНУБА"
-    />
-    <meta
-      property="og:description"
-      content="Безкоштовні матеріали та інтерактивні вправи з англійської мови для студентів Житомирського технологічного фахового коледжу КНУБА."
-    />
-    <meta property="og:url" content="https://english-space-zhtfk.vercel.app/" />
-    <meta property="og:locale" content="uk_UA" />
-
+    <!-- Іконка вкладки -->
     <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
     <link
       rel="icon"
@@ -35,25 +21,25 @@
       href="assets/icons/favicon.png"
     />
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "English Space",
-        "alternateName": [
-          "English Space ЖТФК КНУБА",
-          "English Space Житомирський технологічний коледж"
-        ],
-        "url": "https://english-space-zhtfk.vercel.app/",
-        "inLanguage": ["uk", "en"],
-        "publisher": {
-          "@type": "EducationalOrganization",
-          "name": "Житомирський технологічний фаховий коледж КНУБА"
+    <!-- Запобігає «блиманню» української, якщо збережена інша мова.
+       Приховує сторінку, доки i18n.js не застосує переклад (не довше 1,5 с). -->
+    <script>
+      (function () {
+        try {
+          var lang = localStorage.getItem("englishSpace.lang");
+          if (lang && lang !== "ua") {
+            var root = document.documentElement;
+            root.classList.add("lang-pending");
+            setTimeout(function () {
+              root.classList.remove("lang-pending");
+            }, 1500);
+          }
+        } catch (e) {
+          /* localStorage недоступний — нічого не робимо */
         }
-      }
+      })();
     </script>
 
-    <!-- Код підтвердження Search Console (для нового домену) вставте тут пізніше -->
     <!-- Шрифт Inter (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -160,15 +146,15 @@
               >
             </div>
           </div>
-          <!-- Місце під зображення; замінимо на <img>, коли буде файл -->
-          <div
-            class="media-placeholder"
-            role="img"
-            aria-label="Місце для зображення"
-            data-i18n-attr="aria-label:home.imagePlaceholder"
-          >
-            <span data-i18n="home.imagePlaceholder">Місце для зображення</span>
-          </div>
+          <img
+            class="hero-image"
+            src="assets/images/korpus.jpg"
+            alt="Навчальний корпус коледжу"
+            data-i18n-attr="alt:home.heroAlt"
+            width="870"
+            height="400"
+            fetchpriority="high"
+          />
         </div>
       </section>
 
@@ -267,8 +253,74 @@
         </div>
       </section>
 
+      <!-- ===== ПРО КОЛЕДЖ ===== -->
+      <section class="section section--alt" aria-labelledby="college-title">
+        <div class="container about-grid about-grid--sticky">
+          <div class="section-head">
+            <h2 id="college-title" data-i18n="college.title">
+              Житомирський фаховий технологічний коледж — сучасний освітній
+              простір можливостей
+            </h2>
+            <p class="lead" data-i18n="college.p1">
+              Вітаємо вас у Житомирському фаховому технологічному коледжі —
+              закладі освіти, де традиції поєднуються із сучасністю, знання — з
+              практикою, а студентські мрії перетворюються на професійні цілі!
+            </p>
+          </div>
+          <div class="college-body">
+            <p data-i18n="college.p2">
+              Житомирський фаховий технологічний коледж — це місце, де молодь
+              отримує не лише якісну освіту, а й можливість розкрити свої
+              здібності, знайти однодумців, розвинути таланти та зробити перші
+              кроки до успішного майбутнього.
+            </p>
+            <p data-i18n="college.p3">
+              Наш коледж — це багатогранний освітній простір, у якому створені
+              умови для професійного, інтелектуального й творчого розвитку
+              студентів. Освітній процес спрямований на формування компетентних,
+              відповідальних і конкурентоспроможних фахівців, здатних
+              відповідати вимогам сучасного ринку праці.
+            </p>
+            <p data-i18n="college.p4">
+              Особлива гордість коледжу — наш педагогічний колектив. Це
+              професіонали, які щодня вкладають свої знання, досвід і душу в
+              навчання та виховання молодого покоління. Викладачі використовують
+              сучасні освітні технології, інтерактивні методи навчання,
+              заохочують студентів до дослідницької діяльності, творчості та
+              самореалізації.
+            </p>
+            <p data-i18n="college.p5">
+              Студентське життя в коледжі — це не лише лекції та практичні
+              заняття. Це цікаві зустрічі, тематичні заходи, конкурси,
+              конференції, спортивні змагання, волонтерські ініціативи та
+              спільні проєкти. Кожен має можливість проявити себе, відчути
+              підтримку колективу й стати частиною великої студентської родини.
+            </p>
+            <p data-i18n="college.p6">
+              Ми пишаємося нашими студентами, їхніми досягненнями,
+              наполегливістю, активністю та прагненням до нових вершин. Адже
+              саме молодь є майбутнім нашої країни, її інтелектуальним і
+              професійним потенціалом.
+            </p>
+            <p data-i18n="college.p7">
+              Житомирський фаховий технологічний коледж — це більше, ніж заклад
+              освіти. Це місце, де народжуються ідеї, формується характер,
+              відкриваються таланти та закладається фундамент майбутнього.
+            </p>
+            <p data-i18n="college.p8">
+              Обираючи наш коледж, ви обираєте знання, професіоналізм, розвиток
+              і нові можливості!
+            </p>
+            <p class="college-tagline" data-i18n="college.p9">
+              Житомирський фаховий технологічний коледж — твій старт до
+              успішного майбутнього!
+            </p>
+          </div>
+        </div>
+      </section>
+
       <!-- ===== ПРО РЕСУРС ===== -->
-      <section class="section section--alt" aria-labelledby="about-title">
+      <section class="section" aria-labelledby="about-title">
         <div class="container about-grid">
           <div class="section-head">
             <h2 id="about-title" data-i18n="about.title">
@@ -304,74 +356,55 @@
         </div>
       </section>
 
-      <!-- ===== ВИКЛАДАЧІ (заглушки до отримання реальних даних) ===== -->
-      <section class="section" aria-labelledby="teachers-title">
+      <!-- ===== ВИКЛАДАЧІ ===== -->
+      <!-- Порядок карток: ліворуч, у центрі (Семенюк Л. М.), праворуч -->
+      <section class="section section--alt" aria-labelledby="teachers-title">
         <div class="container">
           <div class="section-head">
             <h2 id="teachers-title" data-i18n="teachers.title">Викладачі</h2>
           </div>
           <div class="card-grid card-grid--3">
             <article class="card card--teacher">
-              <div
-                class="teacher-photo"
-                role="img"
-                aria-label="Заглушка для фотографії викладача"
-                data-i18n-attr="aria-label:teacher.photoAlt"
-              >
-                <span data-i18n="teacher.photo">Фото</span>
-              </div>
-              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
-              <p class="teacher-role" data-i18n="teacher.role">
-                Посада (заглушка)
-              </p>
-              <p class="card-text">
-                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
-                <span data-i18n="teacher.specValue">буде додано.</span>
-              </p>
-              <p class="card-text" data-i18n="teacher.bio">
-                Короткий опис викладача буде додано.
+              <img
+                class="teacher-photo teacher-photo--img"
+                src="assets/images/Tetiana_Yuriivna.jpg"
+                alt="Карплюк Тетяна Юріївна"
+                data-i18n-attr="alt:teacher.karpliuk.name"
+                loading="lazy"
+              />
+              <h3 data-i18n="teacher.karpliuk.name">Карплюк Тетяна Юріївна</h3>
+              <p class="teacher-role" data-i18n="teacher.karpliuk.role">
+                Викладач, спеціаліст першої категорії
               </p>
             </article>
             <article class="card card--teacher">
-              <div
-                class="teacher-photo"
-                role="img"
-                aria-label="Заглушка для фотографії викладача"
-                data-i18n-attr="aria-label:teacher.photoAlt"
-              >
-                <span data-i18n="teacher.photo">Фото</span>
-              </div>
-              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
-              <p class="teacher-role" data-i18n="teacher.role">
-                Посада (заглушка)
-              </p>
-              <p class="card-text">
-                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
-                <span data-i18n="teacher.specValue">буде додано.</span>
-              </p>
-              <p class="card-text" data-i18n="teacher.bio">
-                Короткий опис викладача буде додано.
+              <img
+                class="teacher-photo teacher-photo--img"
+                src="assets/images/Liudmyla_Mykolaivna.png"
+                alt="Семенюк Людмила Миколаївна"
+                data-i18n-attr="alt:teacher.semeniuk.name"
+                loading="lazy"
+              />
+              <h3 data-i18n="teacher.semeniuk.name">
+                Семенюк Людмила Миколаївна
+              </h3>
+              <p class="teacher-role" data-i18n="teacher.semeniuk.role">
+                Спеціаліст вищої категорії, викладач-методист
               </p>
             </article>
             <article class="card card--teacher">
-              <div
-                class="teacher-photo"
-                role="img"
-                aria-label="Заглушка для фотографії викладача"
-                data-i18n-attr="aria-label:teacher.photoAlt"
-              >
-                <span data-i18n="teacher.photo">Фото</span>
-              </div>
-              <h3 data-i18n="teacher.name">Ім'я Прізвище</h3>
-              <p class="teacher-role" data-i18n="teacher.role">
-                Посада (заглушка)
-              </p>
-              <p class="card-text">
-                <strong data-i18n="teacher.specLabel">Спеціалізація:</strong>
-                <span data-i18n="teacher.specValue">буде додано.</span>
-              </p>
-              <p class="card-text" data-i18n="teacher.bio">
-                Короткий опис викладача буде додано.
+              <img
+                class="teacher-photo teacher-photo--img"
+                src="assets/images/Elvira_Tursunivna.jpg"
+                alt="Ходжаєва Ельвіра Турсунівна"
+                data-i18n-attr="alt:teacher.khodzhaieva.name"
+                loading="lazy"
+              />
+              <h3 data-i18n="teacher.khodzhaieva.name">
+                Ходжаєва Ельвіра Турсунівна
+              </h3>
+              <p class="teacher-role" data-i18n="teacher.khodzhaieva.role">
+                Викладач, спеціаліст першої категорії
               </p>
             </article>
           </div>
