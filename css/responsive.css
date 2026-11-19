@@ -106,11 +106,6 @@
     grid-template-columns: 1fr;
   }
 
-  /* На вузьких екранах фото викладача не має бути гігантським квадратом */
-  .teacher-photo {
-    aspect-ratio: 16 / 10;
-  }
-
   .btn-group .btn {
     width: 100%;
   }

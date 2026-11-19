@@ -110,15 +110,15 @@
 
 /* Картка викладача */
 .teacher-photo {
-  aspect-ratio: 1 / 1;
+  display: block;
   width: 100%;
-  border-radius: var(--radius-sm);
-  background: #eaf0f8;
-  border: 1px dashed #b9c6dc;
-  display: grid;
-  place-items: center;
-  color: var(--color-muted);
-  font-size: 0.875rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 25%;
+  background-size: cover;
+  background-position: center 25%;
+  border-radius: var(--radius-md, 12px);
 }
 
 .teacher-role {
