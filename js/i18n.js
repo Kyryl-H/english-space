@@ -120,6 +120,35 @@
         "Житомирський фаховий технологічний коледж — твій старт до успішного майбутнього!",
 
       // Зображення в hero та картки викладачів
+
+      // Редизайн головної: додаткові підписи
+      "home.eyebrow": "Англійська мова · ВСП ЖТФК КНУБА",
+      "home.h1.brand": "English Space",
+      "home.h1.rest": "твій простір для вивчення англійської",
+      "home.fact1": "чотири рівні складності",
+      "home.fact2": "напрямів практики",
+      "home.fact3": "мови інтерфейсу",
+      "home.photoCaption": "Навчальний корпус · вул. Небесної Сотні, 37",
+      "seal.ring": "ЖИТОМИРСЬКИЙ ФАХОВИЙ ТЕХНОЛОГІЧНИЙ КОЛЕДЖ • 1911 •",
+      "dir.kicker": "Що тренуємо",
+      "dir.lead":
+        "Чотири ключові навички, з яких складається впевнене володіння мовою.",
+      "college.kicker": "Про коледж",
+      "college.since": "Традиції з 1911 року",
+      "about.kicker": "Про ресурс",
+      "how.title": "Як це працює",
+      "how.s1.title": "Шукайте",
+      "how.s1.text":
+        "Введіть слово з назви чи опису — список оновиться миттєво.",
+      "how.s2.title": "Фільтруйте",
+      "how.s2.text":
+        "Оберіть категорію або тип матеріалу та рівень від A1 до B2 — фільтри поєднуються між собою і з пошуком.",
+      "how.s3.title": "Перемикайте мову",
+      "how.s3.text":
+        "Кнопки UA / EN змінюють мову інтерфейсу без перезавантаження сторінки — спробуйте просто тут.",
+      "teachers.kicker": "Команда",
+      "teachers.lead":
+        "Викладачі англійської мови Житомирського фахового технологічного коледжу.",
       "home.heroAlt": "Навчальний корпус коледжу",
       "teacher.semeniuk.name": "Семенюк Людмила Миколаївна",
       "teacher.semeniuk.role": "Спеціаліст вищої категорії, викладач-методист",
@@ -291,6 +320,34 @@
         "Zhytomyr Professional Technological College – Your Starting Point for a Successful Future!",
 
       // Зображення в hero та картки викладачів
+
+      // Home redesign: extra labels
+      "home.eyebrow": "English language · ZhTFK KNUBA",
+      "home.h1.brand": "English Space",
+      "home.h1.rest": "your space to learn English",
+      "home.fact1": "four difficulty levels",
+      "home.fact2": "practice areas",
+      "home.fact3": "interface languages",
+      "home.photoCaption": "Main building · 37 Nebesnoi Sotni St.",
+      "seal.ring": "ZHYTOMYR PROFESSIONAL TECHNOLOGICAL COLLEGE • 1911 •",
+      "dir.kicker": "What you practise",
+      "dir.lead": "Four core skills that add up to confident command of English.",
+      "college.kicker": "About the college",
+      "college.since": "A tradition since 1911",
+      "about.kicker": "About the resource",
+      "how.title": "How it works",
+      "how.s1.title": "Search",
+      "how.s1.text":
+        "Type a word from a title or description — the list updates instantly.",
+      "how.s2.title": "Filter",
+      "how.s2.text":
+        "Pick a category or material type and a level from A1 to B2 — filters combine with each other and with search.",
+      "how.s3.title": "Switch language",
+      "how.s3.text":
+        "The UA / EN buttons change the interface language without reloading the page — try it right here.",
+      "teachers.kicker": "The team",
+      "teachers.lead":
+        "English teachers of Zhytomyr Professional Technological College.",
       "home.heroAlt": "Academic building of the college",
       "teacher.semeniuk.name": "Liudmyla Mykolaivna Semeniuk",
       "teacher.semeniuk.role": "Highest-category specialist, Teacher-Methodist",

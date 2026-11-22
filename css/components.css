@@ -1,46 +1,77 @@
 /* ==========================================================
-   components.css — повторно використовувані компоненти:
-   кнопки, картки, фільтри, поле пошуку, стани.
-   Базові стилі; остаточне оформлення — на Етапі 3.
+   components.css — повторно використовувані компоненти
+   (кнопки, картки, бейджі, пошук, фільтри, стани)
+   і секції головної сторінки.
+
+   Класи та id, на які спираються скрипти, не перейменовувати:
+   .card, .card-media, .card-meta, .card-title, .card-text,
+   .card-action, .badge, .badge--outline, .btn--primary, .chip
+   (+ aria-pressed), .state, .spinner, .results-count, .lang-btn.
    ========================================================== */
 
-/* ---------- Кнопки ---------- */
+/* ==========================================================
+   КНОПКИ
+   ========================================================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: 46px;
   padding: 0 var(--space-5);
   font: inherit;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.2;
   text-decoration: none;
-  border: 1px solid transparent;
-  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn--lg {
+  min-height: 54px;
+  padding: 0 var(--space-6);
+  font-size: 1rem;
 }
 
 .btn--primary {
   color: #fff;
-  background: var(--color-navy);
+  background: var(--terra-500);
+  box-shadow: 0 6px 16px -8px rgba(147, 64, 31, 0.7);
 }
 
 .btn--primary:hover {
-  background: var(--color-navy-soft);
+  background: var(--terra-600);
+  transform: translateY(-1px);
 }
 
 .btn--secondary {
-  color: var(--color-navy);
+  color: var(--pine-800);
   background: transparent;
-  border-color: var(--color-navy);
+  border-color: var(--pine-800);
 }
 
 .btn--secondary:hover {
-  background: rgba(20, 40, 75, 0.06);
+  color: var(--cream);
+  background: var(--pine-800);
+}
+
+/* Стрілка в головних кнопках героя */
+.hero .btn--primary::after {
+  content: "→";
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.hero .btn--primary:hover::after {
+  transform: translateX(3px);
 }
 
 .btn-group {
@@ -49,15 +80,17 @@
   gap: var(--space-3);
 }
 
-/* ---------- Сітка карток ---------- */
+/* ==========================================================
+   КАРТКИ (базові)
+   ========================================================== */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--space-5);
 }
 
-/* ---------- Картка ---------- */
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -68,9 +101,26 @@
   box-shadow: var(--shadow-sm);
 }
 
+@media (hover: hover) {
+  .card {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--sand-deep);
+    box-shadow: var(--shadow-md);
+  }
+}
+
 .card-text {
   color: var(--color-muted);
-  font-size: 0.9375rem;
+  font-size: 0.9688rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .card-meta {
@@ -84,15 +134,19 @@
   padding-top: var(--space-3);
 }
 
-/* Місце під іконку (SVG додамо на Етапі 3) */
+.card-action .btn {
+  width: 100%;
+  text-align: center;
+}
+
 .card-icon {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  color: var(--color-blue-text);
-  background: rgba(47, 128, 237, 0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--terra-700);
+  background: var(--terra-100);
 }
 
 .card-icon svg {
@@ -100,109 +154,202 @@
   height: 24px;
 }
 
-/* Місце під зображення завдання */
+/* Зображення завдання (каталог) — верхні кути арочні, як вікна корпусу */
 .card-media {
   aspect-ratio: 16 / 9;
-  border-radius: var(--radius-sm);
-  background: #eaf0f8;
+  margin: calc(var(--space-5) * -1 + 6px) calc(var(--space-5) * -1 + 6px) 0;
+  border-radius: calc(var(--radius-md) - 6px);
+  background: var(--sand);
   overflow: hidden;
 }
 
-/* Картка викладача */
-.teacher-photo {
-  display: block;
+.card-media img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
-  object-position: center 25%;
-  background-size: cover;
-  background-position: center 25%;
-  border-radius: var(--radius-md, 12px);
 }
 
-.teacher-role {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--color-blue-text);
+/* Заголовок картки каталогу (h2 для коректної ієрархії заголовків) */
+.card-title {
+  font-family: var(--font-main);
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--pine-800);
+  overflow-wrap: anywhere;
 }
 
-/* Заглушка під зображення в hero */
-.media-placeholder {
-  aspect-ratio: 4 / 3;
-  width: 100%;
-  display: grid;
-  place-items: center;
-  border: 1px dashed #b9c6dc;
-  border-radius: var(--radius-md);
-  color: var(--color-muted);
-  font-size: 0.875rem;
-  background-color: #eef3fa;
-  /* Тонка сітка — лише поки немає справжнього зображення */
-  background-image:
-    linear-gradient(rgba(20, 40, 75, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 40, 75, 0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
-/* ---------- Бейджі ---------- */
+/* ==========================================================
+   БЕЙДЖІ
+   ========================================================== */
 .badge {
-  display: inline-block;
-  padding: 2px var(--space-3);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-navy);
-  background: #eaf0f8;
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 var(--space-3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--terra-700);
+  background: var(--terra-100);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
 }
 
-/* ---------- Пошук і фільтри ---------- */
+/* Рівень/формат відрізняються від категорії рамкою, а не лише кольором */
+.badge--outline {
+  color: var(--pine-800);
+  background: transparent;
+  border-color: var(--pine-500);
+}
+
+/* ==========================================================
+   ЗАГОЛОВОК СТОРІНОК КАТАЛОГУ (Практика, Матеріали)
+   ========================================================== */
+.page-head {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--space-6);
+  padding: var(--space-8) var(--space-7) calc(var(--space-8) + var(--space-5));
+  color: #e4ece6;
+  background-color: var(--pine-800);
+  background-image: var(--brick-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Арка-вікно — мотив фасаду з емблеми */
+.page-head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: clamp(-60px, -2vw, 0px);
+  bottom: -40px;
+  width: clamp(180px, 26vw, 320px);
+  aspect-ratio: 3 / 4;
+  border: 2px solid rgba(224, 162, 131, 0.45);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(224, 162, 131, 0.3) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(transparent 55%, rgba(224, 162, 131, 0.3) 55% calc(55% + 2px), transparent calc(55% + 2px)),
+    radial-gradient(120% 90% at 50% 0%, rgba(184, 90, 54, 0.35), transparent 70%);
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: calc(clamp(180px, 26vw, 320px) + clamp(-60px, -2vw, 0px) - 70px);
+  top: var(--space-6);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ochre);
+}
+
+.page-head h1 {
+  color: var(--cream);
+  max-width: 16ch;
+}
+
+.page-head .lead {
+  margin-top: var(--space-4);
+  color: #c5d3c9;
+  max-width: 52ch;
+}
+
+/* ==========================================================
+   ПОШУК І ФІЛЬТРИ
+   ========================================================== */
 .toolbar {
+  position: relative;
+  z-index: 2;
   display: grid;
-  gap: var(--space-5);
-  margin-bottom: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5) var(--space-6);
+  margin: calc(var(--space-7) * -1) var(--space-5) var(--space-6);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  background: var(--paper);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.toolbar .search-field {
+  grid-column: 1 / -1;
 }
 
 .search-field {
   display: flex;
   align-items: center;
-  max-width: 520px;
-  min-height: 48px;
-  padding: 0 var(--space-4);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--space-5) 0 52px;
+  background-color: var(--cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a8492a' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 18px center;
+  background-size: 22px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .search-field:focus-within {
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.2);
+  background-color: #fff;
+  border-color: var(--terra-500);
+  box-shadow: 0 0 0 4px rgba(184, 90, 54, 0.18);
 }
 
 .search-field input {
   flex: 1;
   min-width: 0;
-  min-height: 46px;
+  min-height: 52px;
   font: inherit;
+  font-size: 1.0625rem;
   color: var(--color-text);
   background: transparent;
   border: 0;
   outline: 0;
 }
 
+.search-field input::placeholder {
+  color: #8a8c82;
+}
+
 .filter-group {
   display: grid;
-  gap: var(--space-2);
+  align-content: start;
+  gap: var(--space-3);
+  min-width: 0;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
 .filter-label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   padding: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.filter-label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terra-500);
 }
 
 .chip-list {
@@ -216,44 +363,102 @@
   padding: 0 var(--space-4);
   font: inherit;
   font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  font-weight: 600;
+  color: var(--pine-800);
+  background: var(--paper);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
   cursor: pointer;
   transition:
     background-color 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .chip:hover {
-  border-color: var(--color-blue);
+  border-color: var(--terra-500);
 }
 
-/* Активний фільтр відрізняється не лише кольором, а й рамкою та вагою шрифту */
+/* Активний фільтр відрізняється не лише кольором, а й заливкою, рамкою та вагою */
 .chip[aria-pressed="true"] {
-  color: #fff;
+  color: var(--cream);
+  font-weight: 700;
+  background: var(--pine-800);
+  border-color: var(--pine-800);
+}
+
+/* Рівні — компактні «печатки» */
+#level-filters .chip[data-level]:not([data-level="all"]) {
+  min-width: 48px;
+  padding: 0 var(--space-3);
+  font-family: var(--font-display);
   font-weight: 600;
-  background: var(--color-navy);
-  border-color: var(--color-navy);
+  letter-spacing: 0.02em;
+}
+
+#level-filters .chip[aria-pressed="true"]:not([data-level="all"]) {
+  background: var(--terra-500);
+  border-color: var(--terra-500);
+  color: #fff;
 }
 
 .results-count {
-  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-5);
   font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--color-muted);
 }
 
-/* ---------- Стани: завантаження, помилка, порожньо ---------- */
+.results-count::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Каталог: три картки в ряд на ноутбуці */
+.card-grid--catalog {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Великі каталоги: браузер не обробляє картки поза екраном,
+   поки до них не доскролять (прискорює відображення довгих списків) */
+.card-grid--catalog .card {
+  content-visibility: auto;
+  /* лише висота (block-size): ширину не фіксуємо, щоб картки не виходили за екран на вузьких телефонах */
+  contain-intrinsic-block-size: auto 300px;
+}
+
+/* Тонка теракотова лінія зверху картки каталогу */
+.card-grid--catalog .card::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto;
+  height: 4px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: linear-gradient(90deg, var(--terra-500), var(--ochre));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.card-grid--catalog .card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================
+   СТАНИ: завантаження, помилка, порожньо
+   ========================================================== */
 .state {
   display: grid;
   justify-items: center;
   gap: var(--space-3);
-  padding: var(--space-7) var(--space-5);
+  padding: var(--space-8) var(--space-5);
   text-align: center;
-  background: var(--color-surface);
-  border: 1px dashed var(--color-border);
+  background: var(--paper);
+  border: 1.5px dashed var(--sand-deep);
   border-radius: var(--radius-md);
 }
 
@@ -261,148 +466,18 @@
   display: none;
 }
 
-/* ---------- Hero (головна сторінка) ---------- */
-.hero {
-  padding-block: var(--space-8);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--space-7);
-  align-items: center;
-}
-
-.hero-text {
-  display: grid;
-  gap: var(--space-5);
-  justify-items: start;
-}
-
-/* ==========================================================
-   ЕТАП 3 — візуальне оформлення
-   ========================================================== */
-
-/* Hero: заголовок не розтягується занадто широко */
-.hero h1 {
-  max-width: 18ch;
-}
-
-.hero-text .lead {
-  font-size: 1.1875rem;
-}
-
-/* Картки: легке підняття при наведенні (лише для вказівника) */
-@media (hover: hover) {
-  .card {
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease,
-      border-color 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-2px);
-    border-color: #cfd9e8;
-    box-shadow:
-      0 2px 4px rgba(20, 40, 75, 0.06),
-      0 8px 20px rgba(20, 40, 75, 0.08);
-  }
-}
-
-/* Картки напрямів: назва та українська мітка в одному рядку */
-.card h3 {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-/* Блок «Про ресурс» */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-7);
-  align-items: start;
-}
-
-.about-grid .section-head {
-  margin-bottom: 0;
-}
-
-.feature-list {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.feature {
-  display: grid;
-  gap: var(--space-2);
-  padding-left: var(--space-4);
-  border-left: 3px solid var(--color-blue);
-}
-
-/* Картка викладача: щільніший вигляд */
-.card--teacher {
-  padding: var(--space-4);
-}
-
-.teacher-photo span {
-  padding: var(--space-3);
-}
-
-/* Рівно три колонки для трьох карток викладачів */
-.card-grid--3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-}
-
-/* ==========================================================
-   ЕТАП 6 — каталог практики
-   ========================================================== */
-
-/* Заголовок картки каталогу (h2 для коректної ієрархії заголовків) */
-.card-title {
-  font-size: 1.125rem;
-  line-height: 1.35;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: var(--color-navy);
-  overflow-wrap: anywhere;
-}
-
-.card-text {
-  overflow-wrap: anywhere;
-}
-
-.card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Рівень відрізняється від категорії рамкою, а не лише кольором */
-.badge--outline {
-  background: transparent;
-  border: 1px solid #b9c6dc;
-}
-
 .state-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-navy);
+  color: var(--pine-800);
 }
 
-/* Індикатор завантаження */
 .spinner {
-  width: 28px;
-  height: 28px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-blue);
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--sand);
+  border-top-color: var(--terra-500);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -416,55 +491,388 @@
 @media (prefers-reduced-motion: reduce) {
   .spinner {
     animation: none;
-    border-top-color: var(--color-border);
-    border-right-color: var(--color-blue);
+    border-top-color: var(--sand);
+    border-right-color: var(--terra-500);
   }
 }
 
-/* Каталог: трохи ширші картки (3 у ряд на ноутбуці), кнопка на всю ширину картки */
-.card-grid--catalog {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+/* ==========================================================
+   ГОЛОВНА: HERO
+   ========================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-8) var(--space-9);
+  background:
+    radial-gradient(60% 70% at 92% 10%, rgba(214, 161, 76, 0.16), transparent 70%),
+    var(--cream);
 }
 
-.card-action .btn {
-  width: 100%;
-  text-align: center;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--space-8);
+  align-items: center;
 }
 
-/* Великі каталоги: браузер не обробляє картки поза екраном,
-   поки до них не доскролять (прискорює відображення довгих списків) */
-.card-grid--catalog .card {
-  content-visibility: auto;
-  /* лише висота (block-size): ширину не фіксуємо, щоб картки не виходили за екран на вузьких телефонах */
-  contain-intrinsic-block-size: auto 300px;
+.hero-text {
+  display: grid;
+  gap: var(--space-5);
+  justify-items: start;
 }
 
-/* Реальні зображення замість заглушок (див. README, розділ «Фото й зображення») */
+.hero-title {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.hero-title-brand {
+  font-size: clamp(3rem, 7.4vw, 5.75rem);
+  line-height: 0.95;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--pine-800);
+}
+
+.hero-title-rest {
+  font-size: clamp(1.5rem, 2.9vw, 2.25rem);
+  line-height: 1.15;
+  font-style: italic;
+  font-weight: 450;
+  letter-spacing: -0.015em;
+  color: var(--terra-600);
+  max-width: 20ch;
+}
+
+.hero-text .lead {
+  font-size: 1.1875rem;
+  max-width: 44ch;
+}
+
+.hero .btn-group {
+  margin-top: var(--space-2);
+}
+
+/* Три факти під кнопками */
+.hero-facts {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.hero-fact {
+  display: grid;
+  gap: 2px;
+}
+
+.hero-fact dt {
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--pine-800);
+}
+
+.hero-fact dd {
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
+/* Фото корпусу в арочній рамці */
+.hero-visual {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 500px);
+  padding: 0 0 var(--space-6) var(--space-6);
+}
+
+/* Підкладка-тінь теракотового кольору за аркою */
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-6) var(--space-6) 0 0;
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  background-color: var(--terra-500);
+  background-image: var(--brick-light);
+}
+
+.arch-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+  background: var(--sand);
+}
+
+.arch-frame--hero {
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-md);
+  outline: 6px solid var(--cream);
+}
+
 .hero-image {
   width: 100%;
-  height: auto; /* атрибути width/height в <img> лише резервують місце, пропорцію задає aspect-ratio */
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
+  object-position: 48% 50%;
+}
+
+.hero-caption {
+  position: absolute;
+  right: calc(var(--space-6) * -0.5);
+  bottom: calc(var(--space-6) + var(--space-5));
+  max-width: 230px;
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--pine-800);
+  background: var(--paper);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+}
+
+/* «Печатка» — мотив круглої емблеми коледжу */
+.seal {
+  position: absolute;
+  left: calc(var(--space-6) * -0.6);
+  top: 14%;
+  width: clamp(124px, 15vw, 168px);
+  height: auto;
+  filter: drop-shadow(0 12px 24px rgba(20, 42, 34, 0.28));
+}
+
+.seal-disc {
+  fill: var(--pine-800);
+}
+
+.seal-line {
+  fill: none;
+  stroke: var(--terra-300);
+  stroke-width: 1.2;
+  stroke-opacity: 0.6;
+}
+
+.seal-text {
+  font-family: var(--font-main);
+  font-size: 13.5px;
+  font-weight: 800;
+  fill: var(--cream);
+}
+
+.seal-rotor {
+  transform-origin: 100px 100px;
+  animation: seal-spin 40s linear infinite;
+}
+
+.seal-core {
+  fill: var(--terra-500);
+}
+
+.seal-arch {
+  fill: none;
+  stroke: var(--cream);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.seal-book {
+  fill: var(--pine-800);
+}
+
+@keyframes seal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seal-rotor {
+    animation: none;
+  }
+}
+
+/* ==========================================================
+   ГОЛОВНА: НАПРЯМИ НАВЧАННЯ (темна секція)
+   ========================================================== */
+.section--pine h2 {
+  color: var(--cream);
+}
+
+.section--pine .kicker {
+  color: var(--terra-300);
+}
+
+.section--pine .lead {
+  color: #b9c9be;
+}
+
+.direction-grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  counter-reset: dir;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.direction-card {
+  counter-increment: dir;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: transparent;
+  border: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.direction-card:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+/* Порядковий номер напряму */
+.direction-card::before {
+  content: "0" counter(dir);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--terra-300);
+}
+
+.direction-card .card-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--pine-900);
+  background: var(--terra-300);
+  border-radius: 999px 999px 8px 8px; /* мініатюрна арка */
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.direction-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--cream);
+}
+
+.direction-card .card-text {
+  color: #b9c9be;
+}
+
+@media (hover: hover) {
+  .direction-card:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .direction-card:hover .card-icon {
+    background: var(--ochre);
+    transform: translateY(-3px);
+  }
+}
+
+/* ==========================================================
+   ГОЛОВНА: ПРО КОЛЕДЖ
+   ========================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.about-grid .section-head {
+  margin-bottom: 0;
+}
+
+.college {
+  background-image: var(--brick-dark);
+}
+
+.college h2 {
+  font-size: clamp(1.75rem, 3vw, 2.375rem);
+}
+
+.college .lead {
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+/* Великий рік з емблеми — контурними цифрами */
+.college-year {
+  margin-top: var(--space-5);
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--terra-500);
+}
+
+.college-since {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--terra-700);
+}
+
+.college-body {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 64ch;
+  padding: var(--space-7);
+  background: var(--paper);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Буквиця на першому абзаці */
+.college-body > p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-size: 3.6em;
+  font-weight: 600;
+  line-height: 0.8;
+  color: var(--terra-500);
+}
+
+/* Підсумкова фраза — як цитата на теракотовій плашці */
+.college-tagline {
+  position: relative;
+  margin-top: var(--space-3);
+  padding: var(--space-6) var(--space-6) var(--space-6) calc(var(--space-6) + 36px);
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--cream);
+  background-color: var(--terra-500);
+  background-image: var(--brick-light);
   border-radius: var(--radius-md);
 }
 
-.teacher-photo--img {
-  height: auto;
-  border: 0;
-  object-fit: cover;
-  background: none;
-}
-
-/* Блок «Про коледж» (головна) */
-.college-body {
-  display: grid;
-  gap: var(--space-4);
-  max-width: 68ch;
-}
-
-.college-tagline {
-  font-weight: 700;
-  color: var(--color-navy);
+.college-tagline::before {
+  content: "“";
+  position: absolute;
+  left: var(--space-5);
+  top: var(--space-4);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--ochre);
 }
 
 /* Заголовок «Про коледж» лишається на екрані, поки читають довгий текст (лише на широких екранах) */
@@ -475,7 +883,333 @@
   }
 }
 
-/* Фото в квадратній рамці: обрізаємо знизу, щоб обличчя лишалися в кадрі */
+/* ==========================================================
+   ГОЛОВНА: ПРО РЕСУРС + ЯК ЦЕ ПРАЦЮЄ
+   ========================================================== */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5);
+  background: var(--paper);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: var(--space-2);
+  color: var(--cream);
+  background: var(--pine-800);
+  border-radius: 999px 999px 10px 10px;
+}
+
+.feature-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.feature-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.feature-link::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+
+.feature-link:hover::after {
+  transform: translateX(4px);
+}
+
+.how {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: var(--space-7);
+  align-items: center;
+  margin-top: var(--space-8);
+  padding: var(--space-7);
+  background: var(--sand);
+  border-radius: var(--radius-lg);
+}
+
+.how-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 2.8vw, 2.125rem);
+  font-weight: 600;
+  margin-bottom: var(--space-5);
+}
+
+.how-steps {
+  display: grid;
+  gap: var(--space-5);
+  counter-reset: step;
+}
+
+.how-step {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: var(--space-4);
+  row-gap: var(--space-1);
+}
+
+.how-step::before {
+  content: counter(step);
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--cream);
+  background: var(--terra-500);
+  border-radius: 50%;
+}
+
+.how-step h4 {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--pine-800);
+}
+
+.how-step p {
+  color: var(--color-muted);
+  font-size: 0.9688rem;
+}
+
+.how-demo {
+  position: relative;
+  padding-bottom: var(--space-5);
+}
+
+.demo-window {
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--sand-deep);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transform: rotate(-1.2deg);
+}
+
+.demo-bar {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px;
+  background: var(--pine-800);
+}
+
+.demo-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.demo-bar span:first-child {
+  background: var(--terra-300);
+}
+
+.demo-body {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.demo-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font-size: 0.875rem;
+  color: #8a8c82;
+  background: var(--cream);
+  border: 1.5px solid var(--terra-500);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 0 4px rgba(184, 90, 54, 0.14);
+}
+
+.demo-search svg {
+  width: 18px;
+  height: 18px;
+  color: var(--terra-600);
+  flex: none;
+}
+
+.demo-label {
+  margin-top: var(--space-1);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.demo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.demo-chip {
+  padding: 4px 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pine-800);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.demo-chip.is-on {
+  color: var(--cream);
+  background: var(--pine-800);
+  border-color: var(--pine-800);
+}
+
+.demo-chip--level {
+  font-family: var(--font-display);
+}
+
+.demo-chip--level.is-on {
+  background: var(--terra-500);
+  border-color: var(--terra-500);
+}
+
+.demo-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.demo-cards span {
+  height: 58px;
+  border-radius: 10px;
+  background:
+    linear-gradient(var(--sand-deep), var(--sand-deep)) 12px 14px / 40% 8px no-repeat,
+    linear-gradient(var(--color-border), var(--color-border)) 12px 32px / 70% 6px no-repeat,
+    var(--cream);
+}
+
+/* Справжній перемикач мови, «приклеєний» до ілюстрації */
+.lang-switch--demo {
+  position: absolute;
+  right: var(--space-5);
+  bottom: 0;
+  padding: 5px;
+  box-shadow: var(--shadow-md);
+}
+
+.lang-switch--demo .lang-btn {
+  min-width: 54px;
+  min-height: 42px;
+  font-size: 0.9375rem;
+}
+
+.lang-switch--demo::before {
+  content: "";
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  width: 44px;
+  border-top: 2px dashed var(--terra-500);
+}
+
+/* ==========================================================
+   ГОЛОВНА: ВИКЛАДАЧІ
+   ========================================================== */
+.card-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Усі картки на одному рівні й однакової висоти, навіть якщо ім'я
+   переноситься на два рядки */
+.teacher-grid {
+  gap: var(--space-6);
+  align-items: stretch;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+
+.card--teacher {
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-5);
+  text-align: center;
+  background: var(--paper);
+  border-radius: 999px 999px var(--radius-md) var(--radius-md);
+}
+
+/* Фото: однакова арочна рамка, однаковий кадр 4:5 і м'яка спільна тонова обробка,
+   щоб знімки з різним світлом і фоном виглядали як одна серія.
+   Точку кадрування задає --focus у style фото (див. index.html). */
+.teacher-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  margin-bottom: var(--space-4);
+  object-fit: cover;
+  object-position: var(--focus, 50% 20%);
+  border-radius: 999px 999px calc(var(--radius-md) - 4px)
+    calc(var(--radius-md) - 4px);
+  filter: saturate(0.82) contrast(1.04) sepia(0.12);
+  transition: filter 0.4s ease;
+}
+
+@media (hover: hover) {
+  .card--teacher:hover .teacher-photo {
+    filter: none;
+  }
+}
+
+.card--teacher h3 {
+  justify-content: center;
+  padding-inline: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 1.3125rem;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.teacher-role {
+  padding-inline: var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--terra-700);
+  text-wrap: balance;
+}
+
+.teacher-role::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 2px;
+  margin: var(--space-1) auto var(--space-3);
+  background: var(--ochre);
+  border-radius: 2px;
+}
+
 .teacher-photo--img {
-  object-position: center top;
+  border: 0;
+  background: var(--sand);
 }

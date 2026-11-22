@@ -59,12 +59,12 @@
       })();
     </script>
 
-    <!-- Шрифт Inter (Google Fonts) -->
+    <!-- Шрифти: Literata (заголовки) і Manrope (текст), обидва з кирилицею -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Manrope:wght@400..800&display=swap"
     />
 
     <link rel="stylesheet" href="css/style.css" />
@@ -77,7 +77,17 @@
     <!-- ===== ШАПКА (однакова на всіх сторінках) ===== -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href="index.html">English Space</a>
+        <a class="logo" href="index.html">
+          <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" class="logo-mark-ring" />
+            <circle cx="20" cy="20" r="14" class="logo-mark-core" />
+            <path
+              class="logo-mark-arch"
+              d="M14.5 28V18.5a5.5 5.5 0 0 1 11 0V28M20 13v15M14.5 21h11"
+            />
+          </svg>
+          <span class="logo-text">English <em>Space</em></span>
+        </a>
 
         <button
           class="nav-toggle"
